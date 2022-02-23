@@ -14,6 +14,7 @@ import com.example.iawaketestapp.R
 import com.example.iawaketestapp.databinding.PlayerMiniFragmentBinding
 import com.example.iawaketestapp.domain.models.TrackModel
 import com.example.iawaketestapp.ui.base.PlaybackCallback
+import com.example.iawaketestapp.util.TimeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -87,7 +88,10 @@ class PlayerMiniFragment : Fragment() {
     }
 
     private fun renderPositionChanging(nextPosition: Int) {
-        binding?.progress?.value = nextPosition.toLong()
+        binding?.let {
+            it.progress.value = nextPosition.toLong()
+            it.time.text = TimeUtils.formatDuration(requireContext(), nextPosition)
+        }
     }
 
     private fun renderPlayPause(isPlaying: Boolean) {

@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iawaketestapp.R
 import com.example.iawaketestapp.databinding.ItemTrackBinding
 import com.example.iawaketestapp.domain.models.TrackModel
+import com.example.iawaketestapp.util.TimeUtils
 
 class TracksAdapter(
     private val itemClickCallback: (TrackModel) -> Unit
@@ -15,7 +15,7 @@ class TracksAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder =
         ItemTrackBinding
-            .inflate(LayoutInflater.from(parent.context))
+            .inflate(LayoutInflater.from(parent.context), parent, false)
             .let(::TrackViewHolder)
             .apply {
                 itemView.setOnClickListener { itemClickCallback(getItem(bindingAdapterPosition)) }
@@ -45,7 +45,7 @@ class TrackViewHolder(
             name.text = model.title
             val minutes = model.duration / SECONDS
             val seconds = model.duration % SECONDS
-            time.text = root.context.getString(R.string.label_time, minutes.toString(), seconds.toString())
+            time.text = TimeUtils.formatDuration(root.context, model.duration)
         }
     }
 

@@ -16,7 +16,7 @@ class ProgramsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgramViewHolder =
         ItemProgramBinding
-            .inflate(LayoutInflater.from(parent.context))
+            .inflate(LayoutInflater.from(parent.context), parent, false)
             .let(::ProgramViewHolder)
             .apply {
                 itemView.setOnClickListener { itemClickCallback(getItem(bindingAdapterPosition)) }

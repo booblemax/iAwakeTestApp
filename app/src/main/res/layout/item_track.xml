@@ -10,6 +10,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -22,6 +23,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/time"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"

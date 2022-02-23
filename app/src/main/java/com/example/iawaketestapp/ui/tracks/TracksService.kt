@@ -46,10 +46,6 @@ class TracksService : Service() {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 val intent = Intent("com.example.iawaketestapp.PLAYER_STATUS")
                 when (playbackState) {
-                    ExoPlayer.STATE_BUFFERING -> {
-                        intent.putExtra("state", PlaybackStateCompat.STATE_BUFFERING)
-                        broadcaster.sendBroadcast(intent)
-                    }
                     ExoPlayer.STATE_READY -> {
                         if (playWhenReady) {
                             intent.putExtra("state", PlaybackStateCompat.STATE_PLAYING)

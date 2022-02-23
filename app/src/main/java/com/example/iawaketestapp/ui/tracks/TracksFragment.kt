@@ -114,7 +114,11 @@ class TracksFragment : Fragment() {
     }
 
     private fun showError() {
-        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.error_message),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showPlayer() {
@@ -133,7 +137,7 @@ class TracksFragment : Fragment() {
         private const val ID_ARG = "id_arg"
 
         fun newInstance(id: String) = TracksFragment().apply {
-            arguments = bundleOf(ID_ARG to  id)
+            arguments = bundleOf(ID_ARG to id)
         }
     }
 }

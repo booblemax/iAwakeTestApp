@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iawaketestapp.R
@@ -60,14 +63,16 @@ class MainFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding?.let {
-            it.list.layoutManager = LinearLayoutManager(requireContext())
+            it.list.layoutManager = GridLayoutManager(requireContext(), 2)
             it.list.adapter = adapter
-            it.list.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL
-                )
-            )
+            val verticalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+            val horizontalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
+            ResourcesCompat.getDrawable(resources, R.drawable.divider, context?.theme)?.let {
+                verticalDecorator.setDrawable(it)
+                horizontalDecorator.setDrawable(it)
+            }
+            it.list.addItemDecoration(verticalDecorator)
+            it.list.addItemDecoration(horizontalDecorator)
         }
     }
 
@@ -76,6 +81,7 @@ class MainFragment : Fragment() {
             Resource.Loading -> showLoading()
             is Resource.Error -> {
                 hideLoading()
+                showError()
             }
             is Resource.Success -> {
                 hideLoading()
@@ -96,6 +102,10 @@ class MainFragment : Fragment() {
             it.progress.isVisible = false
             it.list.isVisible = true
         }
+    }
+
+    private fun showError() {
+        Toast.makeText(requireContext(), requireContext().getString(R.string.error_message), Toast.LENGTH_SHORT).show()
     }
 
     companion object {

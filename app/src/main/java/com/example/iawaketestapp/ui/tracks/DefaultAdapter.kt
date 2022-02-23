@@ -21,9 +21,7 @@ class DefaultAdapter(
         return PendingIntent.getActivity(context, 0, intent, 0)
     }
 
-    override fun getCurrentContentText(player: Player): CharSequence? {
-        return "description description description"
-    }
+    override fun getCurrentContentText(player: Player): CharSequence = ""
 
     override fun getCurrentLargeIcon(
         player: Player,

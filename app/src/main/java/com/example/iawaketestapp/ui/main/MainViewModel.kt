@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             mProgramsState.emit(Resource.Loading)
             try {
-                val programs = repository.loadPrograms() //todo првоерить ексепш от ретрофита
+                val programs = repository.loadPrograms()
                 mProgramsState.emit(Resource.Success(programs))
             } catch (e: Exception) {
                 Timber.e(e)
