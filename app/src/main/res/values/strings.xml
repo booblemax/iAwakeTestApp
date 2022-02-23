@@ -2,4 +2,6 @@
     <string name="app_name">iAwakeTestAPp</string>
     <string name="title_tracks">Tracks</string>
     <string name="title_programs">Programs</string>
+    <string name="label_time">%s:%s</string>
+    <string name="splash_title">iAwakeTestApp</string>
 </resources>

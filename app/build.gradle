@@ -18,9 +18,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "String", "TOKEN", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYXlvbDM1MDUwQGlzaG9wMmsuY29tIiwiYXVkIjoic2Vzc2lvbi5jcmVhdGUiLCJpYXQiOjE2NDU2MjQxOTQsImV4cCI6MTY0NTcxMDU5NH0.DuUHHuEGmQjiqfDt_Iaj1yjsukYUmtZakbpbUVMAH2k\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TOKEN", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYXlvbDM1MDUwQGlzaG9wMmsuY29tIiwiYXVkIjoic2Vzc2lvbi5jcmVhdGUiLCJpYXQiOjE2NDU2MjQxOTQsImV4cCI6MTY0NTcxMDU5NH0.DuUHHuEGmQjiqfDt_Iaj1yjsukYUmtZakbpbUVMAH2k\""
         }
     }
 
@@ -49,6 +54,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
     implementation 'com.google.android.exoplayer:exoplayer-core:2.16.1'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.16.1'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.16.1'
     implementation "com.google.android.exoplayer:extension-mediasession:2.16.1"
 
@@ -66,6 +72,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     kapt 'com.github.bumptech.glide:compiler:4.13.0'

@@ -7,5 +7,5 @@ import retrofit2.http.Query
 interface MediaService {
 
     @GET("api/v2/media-library/free")
-    suspend fun loadMedia(@Query("resetCache") resetCache: Boolean = true): MediaResponse
+    suspend fun loadMedia(@Query("resetCache") resetCache: Boolean = false): MediaResponse
 }

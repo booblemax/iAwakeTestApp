@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iawaketestapp.R
 import com.example.iawaketestapp.databinding.ItemTrackBinding
 import com.example.iawaketestapp.domain.models.TrackModel
 
@@ -41,7 +42,14 @@ class TrackViewHolder(
 
     fun bind(model: TrackModel) {
         with(binding) {
-
+            name.text = model.title
+            val minutes = model.duration / SECONDS
+            val seconds = model.duration % SECONDS
+            time.text = root.context.getString(R.string.label_time, minutes.toString(), seconds.toString())
         }
+    }
+
+    companion object {
+        private const val SECONDS = 60
     }
 }

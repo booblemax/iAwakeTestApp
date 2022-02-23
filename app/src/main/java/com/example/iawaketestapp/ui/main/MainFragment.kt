@@ -11,9 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iawaketestapp.R
 import com.example.iawaketestapp.databinding.MainFragmentBinding
 import com.example.iawaketestapp.domain.Resource
 import com.example.iawaketestapp.domain.models.ProgramModel
+import com.example.iawaketestapp.ui.tracks.TracksFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,7 +26,10 @@ class MainFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel>()
     private var binding: MainFragmentBinding? = null
     private val adapter = ProgramsAdapter {
-        //todo open list of tracks
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, TracksFragment.newInstance(it.id))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onCreateView(
@@ -36,7 +41,6 @@ class MainFragment : Fragment() {
         }
         .root
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,6 +49,8 @@ class MainFragment : Fragment() {
         viewModel.programsState
             .onEach { processState(it) }
             .launchIn(lifecycleScope)
+
+        viewModel.loadPrograms()
     }
 
     override fun onDestroyView() {

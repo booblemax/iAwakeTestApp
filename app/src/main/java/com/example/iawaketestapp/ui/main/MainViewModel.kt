@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,6 +27,7 @@ class MainViewModel @Inject constructor(
                 val programs = repository.loadPrograms() //todo првоерить ексепш от ретрофита
                 mProgramsState.emit(Resource.Success(programs))
             } catch (e: Exception) {
+                Timber.e(e)
                 mProgramsState.emit(Resource.Error())
             }
         }
