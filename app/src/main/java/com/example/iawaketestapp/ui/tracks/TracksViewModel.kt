@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.iawaketestapp.domain.Resource
 import com.example.iawaketestapp.domain.models.TrackModel
 import com.example.iawaketestapp.domain.repository.MediaRepository
+import com.example.iawaketestapp.ui.base.MusicStateManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TracksViewModel @Inject constructor(
-    private val repository: MediaRepository
+    private val repository: MediaRepository,
+    private val musicStateManager: MusicStateManager
 ) : ViewModel() {
 
     private val mTracksState = MutableStateFlow<Resource<List<TrackModel>>>(Resource.Loading)
@@ -28,6 +30,12 @@ class TracksViewModel @Inject constructor(
             } catch (e: Exception) {
                 mTracksState.emit(Resource.Error())
             }
+        }
+    }
+
+    fun updatePlayingSong(song: TrackModel) {
+        viewModelScope.launch {
+            musicStateManager.updatePlayingSong(song)
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.example.iawaketestapp.ui.tracks
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.iawaketestapp.R
 import com.example.iawaketestapp.databinding.TracksFragmentBinding
 import com.example.iawaketestapp.domain.Resource
 import com.example.iawaketestapp.domain.models.TrackModel
 import com.example.iawaketestapp.ui.base.PlaybackCallback
+import com.example.iawaketestapp.ui.player.PlayerMiniFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,7 +29,9 @@ class TracksFragment : Fragment() {
     private var binding: TracksFragmentBinding? = null
     private var playbackCallback: PlaybackCallback? = null
     private val adapter = TracksAdapter {
+        viewModel.updatePlayingSong(it)
         playbackCallback?.play(it.media.url)
+        showPlayer()
     }
 
     override fun onCreateView(
@@ -113,6 +115,18 @@ class TracksFragment : Fragment() {
 
     private fun showError() {
         Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showPlayer() {
+        childFragmentManager.findFragmentByTag("PlayerMiniFragment")?.let { return }
+        childFragmentManager.beginTransaction()
+            .add(
+                R.id.player_container,
+                PlayerMiniFragment::class.java,
+                null,
+                "PlayerMiniFragment"
+            )
+            .commit()
     }
 
     companion object {

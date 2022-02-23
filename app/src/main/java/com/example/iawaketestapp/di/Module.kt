@@ -26,6 +26,8 @@ class Module {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor { message ->
                 Timber.tag("OkHttp").i(message)
+            }.apply {
+                level = HttpLoggingInterceptor.Level.BODY
             })
             .build()
 
