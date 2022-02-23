@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">iAwakeTestAPp</string>
+    <string name="title_tracks">Tracks</string>
+    <string name="title_programs">Programs</string>
 </resources>
